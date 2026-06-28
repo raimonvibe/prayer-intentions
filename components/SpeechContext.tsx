@@ -9,6 +9,7 @@ import {
   useState,
 } from "react";
 import {
+  getBrowserSelectionText,
   getDefaultVoiceURI,
   isSpeechSupported,
   loadVoices,
@@ -23,8 +24,11 @@ type SpeechContextValue = {
   speechModeEnabled: boolean;
   toggleSpeechMode: () => void;
   isSpeaking: boolean;
+  isReadingSelection: boolean;
   activeTopicId: string | null;
+  selectionText: string;
   speakTopic: (topicId: string, text: string) => void;
+  speakSelection: () => void;
   stopSpeaking: () => void;
   speechSupported: boolean;
   voices: SpeechVoiceOption[];
@@ -38,7 +42,9 @@ const SpeechContext = createContext<SpeechContextValue | null>(null);
 export function SpeechProvider({ children }: { children: React.ReactNode }) {
   const [speechModeEnabled, setSpeechModeEnabled] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
+  const [isReadingSelection, setIsReadingSelection] = useState(false);
   const [activeTopicId, setActiveTopicId] = useState<string | null>(null);
+  const [selectionText, setSelectionText] = useState("");
   const [speechSupported, setSpeechSupported] = useState(false);
   const [voices, setVoices] = useState<SpeechVoiceOption[]>([]);
   const [selectedVoiceURI, setSelectedVoiceURIState] = useState<string | null>(
@@ -81,6 +87,15 @@ export function SpeechProvider({ children }: { children: React.ReactNode }) {
     };
   }, []);
 
+  useEffect(() => {
+    const updateSelection = () => {
+      setSelectionText(getBrowserSelectionText());
+    };
+
+    document.addEventListener("selectionchange", updateSelection);
+    return () => document.removeEventListener("selectionchange", updateSelection);
+  }, []);
+
   const setSelectedVoiceURI = useCallback((voiceURI: string) => {
     setSelectedVoiceURIState(voiceURI);
     localStorage.setItem(VOICE_STORAGE_KEY, voiceURI);
@@ -89,6 +104,7 @@ export function SpeechProvider({ children }: { children: React.ReactNode }) {
   const stopSpeaking = useCallback(() => {
     stopSpeech();
     setIsSpeaking(false);
+    setIsReadingSelection(false);
     setActiveTopicId(null);
   }, []);
 
@@ -108,6 +124,7 @@ export function SpeechProvider({ children }: { children: React.ReactNode }) {
       if (!isSpeechSupported()) return;
 
       setActiveTopicId(topicId);
+      setIsReadingSelection(false);
       setIsSpeaking(true);
 
       speakText(text, {
@@ -125,6 +142,27 @@ export function SpeechProvider({ children }: { children: React.ReactNode }) {
     [selectedVoiceURI]
   );
 
+  const speakSelection = useCallback(() => {
+    const text = getBrowserSelectionText();
+    if (!text || !isSpeechSupported()) return;
+
+    setActiveTopicId(null);
+    setIsReadingSelection(true);
+    setIsSpeaking(true);
+
+    speakText(text, {
+      voiceURI: selectedVoiceURI,
+      onEnd: () => {
+        setIsSpeaking(false);
+        setIsReadingSelection(false);
+      },
+      onError: () => {
+        setIsSpeaking(false);
+        setIsReadingSelection(false);
+      },
+    });
+  }, [selectedVoiceURI]);
+
   const toggleSpeechMode = useCallback(() => {
     setSpeechModeEnabled((prev) => {
       if (prev) stopSpeaking();
@@ -137,8 +175,11 @@ export function SpeechProvider({ children }: { children: React.ReactNode }) {
       speechModeEnabled,
       toggleSpeechMode,
       isSpeaking,
+      isReadingSelection,
       activeTopicId,
+      selectionText,
       speakTopic,
+      speakSelection,
       stopSpeaking,
       speechSupported,
       voices,
@@ -150,8 +191,11 @@ export function SpeechProvider({ children }: { children: React.ReactNode }) {
       speechModeEnabled,
       toggleSpeechMode,
       isSpeaking,
+      isReadingSelection,
       activeTopicId,
+      selectionText,
       speakTopic,
+      speakSelection,
       stopSpeaking,
       speechSupported,
       voices,

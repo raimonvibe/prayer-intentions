@@ -15,6 +15,33 @@ export function stopSpeech(): void {
   }
 }
 
+export function getBrowserSelectionText(): string {
+  if (typeof window === "undefined") return "";
+
+  const selection = window.getSelection();
+  if (!selection || selection.isCollapsed || selection.rangeCount === 0) {
+    return "";
+  }
+
+  const text = selection.toString().replace(/\s+/g, " ").trim();
+  if (text.length < 2) return "";
+
+  const anchorNode = selection.anchorNode;
+  const focusNode = selection.focusNode;
+  const nodes = [anchorNode, focusNode];
+
+  for (const node of nodes) {
+    if (!node) continue;
+    const element =
+      node instanceof Element ? node : node.parentElement;
+    if (element?.closest('[data-speech-ui="true"]')) {
+      return "";
+    }
+  }
+
+  return text;
+}
+
 function mapVoices(voices: SpeechSynthesisVoice[]): SpeechVoiceOption[] {
   return voices.map((voice) => ({
     name: voice.name,

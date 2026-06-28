@@ -6,6 +6,7 @@ import {
   Cloud,
   Mic,
   Square,
+  TextSelect,
   ToggleLeft,
   ToggleRight,
   Volume2,
@@ -19,12 +20,15 @@ export function SpeechDock() {
     speechModeEnabled,
     toggleSpeechMode,
     isSpeaking,
+    isReadingSelection,
     stopSpeaking,
     speechSupported,
     voices,
     selectedVoiceURI,
     setSelectedVoiceURI,
     voicesLoading,
+    selectionText,
+    speakSelection,
   } = useSpeech();
 
   const [isMinimized, setIsMinimized] = useState(false);
@@ -46,10 +50,16 @@ export function SpeechDock() {
   if (!speechSupported) return null;
 
   const networkCount = voices.filter((voice) => voice.isNetwork).length;
+  const hasSelection = selectionText.length > 0;
+  const selectionPreview =
+    selectionText.length > 72
+      ? `${selectionText.slice(0, 72).trim()}…`
+      : selectionText;
 
   if (mounted && isMinimized) {
     return (
       <aside
+        data-speech-ui="true"
         className="fixed bottom-[max(1rem,env(safe-area-inset-bottom,0px))] left-[max(1rem,env(safe-area-inset-left,0px))] z-30"
         aria-label="Speech controls"
       >
@@ -70,6 +80,7 @@ export function SpeechDock() {
 
   return (
     <aside
+      data-speech-ui="true"
       className="fixed bottom-[max(1rem,env(safe-area-inset-bottom,0px))] left-[max(1rem,env(safe-area-inset-left,0px))] z-30 w-[min(calc(100vw-2rem),18rem)] rounded-lg border border-line bg-surface p-3 shadow-sm"
       aria-label="Speech controls"
     >
@@ -120,6 +131,31 @@ export function SpeechDock() {
           </select>
         </label>
 
+        <div>
+          <button
+            type="button"
+            onClick={speakSelection}
+            disabled={!hasSelection}
+            className="inline-flex w-full items-center justify-center gap-2 rounded-md border border-line px-3 py-2 text-sm transition focus:outline-none focus-visible:ring-1 focus-visible:ring-[var(--accent)] enabled:text-theme enabled:hover:bg-surface-muted disabled:cursor-not-allowed disabled:opacity-50"
+            aria-label="Read selected text aloud"
+          >
+            <TextSelect className="h-4 w-4 shrink-0" aria-hidden="true" />
+            Read selection
+          </button>
+          <p className="mt-1.5 text-[11px] leading-relaxed text-theme-subtle">
+            {hasSelection ? (
+              <>
+                Selected: &ldquo;{selectionPreview}&rdquo;
+              </>
+            ) : (
+              "Highlight any text on the page, then tap read selection."
+            )}
+          </p>
+          {isSpeaking && isReadingSelection && (
+            <p className="mt-1 text-[11px] text-accent">Reading your selection…</p>
+          )}
+        </div>
+
         <div className="flex gap-2">
           <button
             type="button"
@@ -136,7 +172,7 @@ export function SpeechDock() {
             ) : (
               <ToggleLeft className="h-4 w-4" aria-hidden="true" />
             )}
-            {speechModeEnabled ? "On" : "Off"}
+            Auto-read
           </button>
 
           {isSpeaking && (

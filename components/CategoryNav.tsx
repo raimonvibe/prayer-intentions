@@ -34,7 +34,7 @@ export function CategoryNav({
   return (
     <nav
       aria-label="Filter by category"
-      className="sticky top-[4.75rem] z-10 -mx-4 border-b border-line bg-[var(--background)]/95 px-4 backdrop-blur-sm sm:top-[4.5rem] sm:-mx-8 sm:px-8"
+      className="sticky top-[var(--header-height)] z-20 -mx-4 border-b border-line bg-[var(--background)]/92 px-4 backdrop-blur-md supports-[backdrop-filter]:bg-[var(--background)]/85 sm:-mx-8 sm:px-8"
     >
       <div className="flex snap-x snap-mandatory gap-1 overflow-x-auto py-3 pr-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {items.map((item) => {
