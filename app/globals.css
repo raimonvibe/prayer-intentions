@@ -1,33 +1,33 @@
 @import "tailwindcss";
 
 :root {
-  --background-start: #f5f0e6;
-  --background-mid: #ebe4d8;
-  --background-end: #e0d8cc;
-  --foreground: #1c1917;
-  --foreground-muted: #44403c;
-  --foreground-subtle: #57534e;
-  --surface: #faf7f2;
-  --surface-elevated: #fffdf9;
-  --surface-border: #c8bfb0;
-  --input-bg: #fffdf9;
+  --background: #f7f6f3;
+  --foreground: #1a1a18;
+  --foreground-muted: #5c5c58;
+  --foreground-subtle: #8a8a84;
+  --surface: #ffffff;
+  --surface-muted: #efeee9;
+  --line: #e3e2dc;
+  --accent: #5f6b62;
+  --accent-soft: #eef1ee;
+  --input-bg: #ffffff;
 }
 
 .dark {
-  --background-start: #2e2e2e;
-  --background-mid: #1c1c1c;
-  --background-end: #0a0a0a;
-  --foreground: #fafaf9;
-  --foreground-muted: #e7e5e4;
-  --foreground-subtle: #d6d3d1;
-  --surface: #242424;
-  --surface-elevated: #2e2e2e;
-  --surface-border: #525252;
-  --input-bg: #2a2a2a;
+  --background: #121211;
+  --foreground: #f2f2ef;
+  --foreground-muted: #b8b8b2;
+  --foreground-subtle: #8a8a84;
+  --surface: #1a1a19;
+  --surface-muted: #222221;
+  --line: #2e2e2c;
+  --accent: #a3b0a4;
+  --accent-soft: #1f2420;
+  --input-bg: #1a1a19;
 }
 
 @theme inline {
-  --color-background: var(--background-start);
+  --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-brown-800: #5c4033;
   --font-sans: var(--font-inter);
@@ -37,18 +37,14 @@
 body {
   min-height: 100vh;
   color: var(--foreground);
-  background: linear-gradient(
-    135deg,
-    var(--background-start) 0%,
-    var(--background-mid) 45%,
-    var(--background-end) 100%
-  );
-  background-attachment: fixed;
+  background: var(--background);
   font-family: var(--font-inter), system-ui, sans-serif;
+  letter-spacing: -0.01em;
 }
 
 .font-serif {
   font-family: var(--font-lora), Georgia, "Times New Roman", serif;
+  letter-spacing: 0;
 }
 
 .text-theme {
@@ -67,12 +63,20 @@ body {
   background-color: var(--surface);
 }
 
-.bg-surface-elevated {
-  background-color: var(--surface-elevated);
+.bg-surface-muted {
+  background-color: var(--surface-muted);
 }
 
-.border-surface {
-  border-color: var(--surface-border);
+.border-line {
+  border-color: var(--line);
+}
+
+.text-accent {
+  color: var(--accent);
+}
+
+.bg-accent-soft {
+  background-color: var(--accent-soft);
 }
 
 .sr-only {
@@ -85,4 +89,10 @@ body {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border-width: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }

@@ -1,5 +1,6 @@
 "use client";
 
+import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 
@@ -13,11 +14,11 @@ export function DarkModeToggle() {
     return (
       <button
         type="button"
-        className="rounded-full border border-surface bg-surface-elevated px-3 py-2 text-sm text-theme"
+        className="rounded-md border border-line p-2 text-theme-subtle"
         aria-label="Toggle dark mode"
         disabled
       >
-        <i className="fas fa-circle-half-stroke" aria-hidden="true" />
+        <Sun className="h-4 w-4" aria-hidden="true" />
       </button>
     );
   }
@@ -28,14 +29,15 @@ export function DarkModeToggle() {
     <button
       type="button"
       onClick={() => setTheme(isDark ? "light" : "dark")}
-      className="rounded-full border border-surface bg-surface-elevated px-3 py-2 text-sm text-theme transition hover:bg-stone-200/70 focus:outline-none focus-visible:ring-2 focus-visible:ring-stone-500 dark:hover:bg-stone-700/70"
+      className="rounded-md border border-line p-2 text-theme-muted transition hover:bg-surface-muted hover:text-theme focus:outline-none focus-visible:ring-1 focus-visible:ring-[var(--accent)]"
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
       title={isDark ? "Light mode" : "Dark mode"}
     >
-      <i
-        className={isDark ? "fas fa-sun" : "fas fa-moon"}
-        aria-hidden="true"
-      />
+      {isDark ? (
+        <Sun className="h-4 w-4" aria-hidden="true" />
+      ) : (
+        <Moon className="h-4 w-4" aria-hidden="true" />
+      )}
     </button>
   );
 }

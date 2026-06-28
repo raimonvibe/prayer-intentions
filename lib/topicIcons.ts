@@ -1,0 +1,63 @@
+import {
+  AlertTriangle,
+  Armchair,
+  BookOpen,
+  Brain,
+  CloudRain,
+  Compass,
+  Globe2,
+  GraduationCap,
+  Gavel,
+  HandHeart,
+  Handshake,
+  HeartPulse,
+  Home,
+  Landmark,
+  Leaf,
+  Lock,
+  Mountain,
+  Plane,
+  RefreshCw,
+  Route,
+  Scale,
+  ShieldAlert,
+  Sparkles,
+  Stethoscope,
+  Sun,
+  Users,
+  type LucideIcon,
+} from "lucide-react";
+
+export const topicIconMap: Record<string, LucideIcon> = {
+  family: Users,
+  "people-in-war": ShieldAlert,
+  criminals: Scale,
+  "poor-and-homeless": Home,
+  "healing-for-the-sick": HeartPulse,
+  "guidance-in-decisions": Compass,
+  "peace-in-your-heart": Sparkles,
+  forgiveness: HandHeart,
+  "strength-in-hardship": Mountain,
+  "those-grieving": CloudRain,
+  "victims-of-injustice": Gavel,
+  "refugees-and-displaced": Plane,
+  "creation-and-environment": Leaf,
+  "leaders-and-governments": Landmark,
+  "teachers-and-students": GraduationCap,
+  "healthcare-workers": Stethoscope,
+  "addiction-recovery": RefreshCw,
+  "mental-health": Brain,
+  reconciliation: Handshake,
+  "elderly-and-lonely": Armchair,
+  "those-imprisoned": Lock,
+  "victims-of-trafficking": AlertTriangle,
+  "discerning-vocation": Route,
+  "gratitude-for-blessings": Sun,
+  "unity-across-faiths": Globe2,
+};
+
+export const defaultTopicIcon: LucideIcon = BookOpen;
+
+export function getTopicIcon(topicId: string): LucideIcon {
+  return topicIconMap[topicId] ?? defaultTopicIcon;
+}

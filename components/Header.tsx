@@ -4,17 +4,16 @@ import { DarkModeToggle } from "@/components/DarkModeToggle";
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-20 border-b border-surface bg-surface-elevated/90 backdrop-blur-md">
-      <div className="mx-auto flex max-w-4xl items-center justify-between gap-4 px-4 py-4 sm:px-6">
-        <div>
-          <h1 className="font-serif text-xl font-semibold tracking-tight text-theme sm:text-2xl">
+    <header className="border-b border-line bg-[var(--background)]/95 backdrop-blur-sm">
+      <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-4 sm:px-8 sm:py-5">
+        <div className="min-w-0">
+          <p className="text-[11px] font-medium uppercase tracking-[0.24em] text-theme-subtle">
             Prayer Intentions
-          </h1>
-          <p className="hidden text-sm text-theme-muted sm:block">
-            Who and what we lift up in prayer
           </p>
+          <h1 className="mt-1 truncate text-base font-medium text-theme sm:text-xl sm:whitespace-normal">
+            Who we lift up in prayer
+          </h1>
         </div>
-
         <DarkModeToggle />
       </div>
     </header>

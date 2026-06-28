@@ -1,5 +1,7 @@
 "use client";
 
+import { Search, X } from "lucide-react";
+
 type SearchBarProps = {
   value: string;
   onChange: (value: string) => void;
@@ -18,9 +20,9 @@ export function SearchBar({
       <label htmlFor="topic-search" className="sr-only">
         Search prayer topics
       </label>
-      <div className="relative">
-        <i
-          className="fas fa-search pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-theme-subtle"
+      <div className="relative border-b border-line">
+        <Search
+          className="pointer-events-none absolute left-0 top-1/2 h-4 w-4 -translate-y-1/2 text-theme-subtle"
           aria-hidden="true"
         />
         <input
@@ -28,24 +30,24 @@ export function SearchBar({
           type="search"
           value={value}
           onChange={(event) => onChange(event.target.value)}
-          placeholder="Search titles, words, prayers..."
-          className="w-full rounded-2xl border border-surface bg-[var(--input-bg)] py-3.5 pl-11 pr-11 text-theme placeholder:text-theme-subtle focus:border-stone-500 focus:outline-none focus:ring-2 focus:ring-stone-400/50 dark:focus:ring-stone-500/40"
+          placeholder="Search topics, prayers, words..."
+          className="w-full bg-transparent py-3 pl-7 pr-8 text-theme placeholder:text-theme-subtle focus:outline-none"
         />
         {value && (
           <button
             type="button"
             onClick={() => onChange("")}
-            className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full p-1.5 text-theme-muted transition hover:bg-stone-200/80 hover:text-theme dark:hover:bg-stone-700/80"
+            className="absolute right-0 top-1/2 -translate-y-1/2 p-1 text-theme-subtle transition hover:text-theme"
             aria-label="Clear search"
           >
-            <i className="fas fa-times" aria-hidden="true" />
+            <X className="h-4 w-4" aria-hidden="true" />
           </button>
         )}
       </div>
-      <p className="mt-2 text-sm text-theme-muted">
+      <p className="mt-3 text-xs uppercase tracking-[0.18em] text-theme-subtle">
         {value.trim()
-          ? `${resultCount} of ${totalCount} topics match`
-          : `${totalCount} topics to explore`}
+          ? `${resultCount} of ${totalCount} matches`
+          : `${totalCount} intentions across 5 categories`}
       </p>
     </div>
   );
