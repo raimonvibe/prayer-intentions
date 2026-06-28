@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+:root {
+  --background-start: #faf7f0;
+  --background-mid: #f5f0e6;
+  --background-end: #ebe4d8;
+  --foreground: #3d3830;
+  --card-bg: rgba(250, 247, 242, 0.75);
+  --card-border: rgba(168, 162, 158, 0.45);
+}
+
+.dark {
+  --background-start: #2a2a2a;
+  --background-mid: #1a1a1a;
+  --background-end: #0d0d0d;
+  --foreground: #e7e5e4;
+  --card-bg: rgba(37, 37, 37, 0.75);
+  --card-border: rgba(87, 83, 78, 0.5);
+}
+
+@theme inline {
+  --color-background: var(--background-start);
+  --color-foreground: var(--foreground);
+  --color-brown-800: #5c4033;
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-lora);
+}
+
+body {
+  min-height: 100vh;
+  color: var(--foreground);
+  background: linear-gradient(
+    135deg,
+    var(--background-start) 0%,
+    var(--background-mid) 45%,
+    var(--background-end) 100%
+  );
+  background-attachment: fixed;
+  font-family: var(--font-inter), system-ui, sans-serif;
+}
+
+.font-serif {
+  font-family: var(--font-lora), Georgia, "Times New Roman", serif;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
