@@ -52,11 +52,11 @@ export function TopicAccordion({
 
   if (topics.length === 0) {
     return (
-      <div className="rounded-2xl border border-dashed border-stone-400/60 bg-[#faf7f2]/50 px-6 py-12 text-center dark:border-stone-600 dark:bg-[#252525]/50">
-        <p className="font-serif text-lg text-stone-700 dark:text-stone-300">
+      <div className="rounded-2xl border border-dashed border-surface bg-surface px-6 py-12 text-center">
+        <p className="font-serif text-lg text-theme">
           No topics match &ldquo;{searchQuery}&rdquo;
         </p>
-        <p className="mt-2 text-sm text-stone-600 dark:text-stone-400">
+        <p className="mt-2 text-sm text-theme-muted">
           Try different words or clear your search to see all intentions.
         </p>
       </div>
@@ -72,27 +72,27 @@ export function TopicAccordion({
           <section
             key={topic.id}
             id={`topic-${topic.id}`}
-            className="overflow-hidden rounded-2xl border border-stone-300/60 bg-[#faf7f2]/70 shadow-sm transition dark:border-stone-600/60 dark:bg-[#252525]/70"
+            className="overflow-hidden rounded-2xl border border-surface bg-surface-elevated shadow-sm"
           >
             <button
               type="button"
               onClick={() => toggleTopic(topic)}
               aria-expanded={isExpanded}
               aria-controls={`topic-panel-${topic.id}`}
-              className="flex w-full items-start justify-between gap-4 px-4 py-4 text-left transition hover:bg-stone-200/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-stone-500 dark:hover:bg-stone-800/40 sm:px-5"
+              className="flex w-full items-start justify-between gap-4 px-4 py-4 text-left transition hover:bg-stone-200/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-stone-500 dark:hover:bg-stone-700/40 sm:px-5"
             >
               <div className="min-w-0 flex-1">
-                <h2 className="font-serif text-lg font-semibold text-stone-800 dark:text-stone-100 sm:text-xl">
+                <h2 className="font-serif text-lg font-semibold text-theme sm:text-xl">
                   {topic.title}
                 </h2>
                 {!isExpanded && (
-                  <p className="mt-1 line-clamp-2 text-sm text-stone-600 dark:text-stone-400">
+                  <p className="mt-1 line-clamp-2 text-sm text-theme-muted">
                     {topic.teaser}
                   </p>
                 )}
               </div>
               <span
-                className={`mt-1 shrink-0 text-stone-500 transition-transform duration-200 dark:text-stone-400 ${
+                className={`mt-1 shrink-0 text-theme-subtle transition-transform duration-200 ${
                   isExpanded ? "rotate-180" : ""
                 }`}
                 aria-hidden="true"

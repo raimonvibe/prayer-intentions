@@ -1,5 +1,7 @@
 ![Prayer Intentions social preview](public/social-share.png)
 
+**Live site:** [https://prayer-intentions.vercel.app/](https://prayer-intentions.vercel.app/)
+
 # 🙏 Prayer Intentions
 
 A calm, user-friendly **Next.js** website for exploring who and what to pray for — with storytelling descriptions, sample prayers, and gentle guidance on when to pray.
@@ -12,7 +14,7 @@ Built with a simple accordion layout, search, read-aloud speech mode, dark mode,
 
 - 📖 **Browse 25+ prayer topics** — family, healing, peace, justice, refugees, and more
 - 🔍 **Search** by title, keywords, prayers, or descriptions
-- 🔊 **Listen** to any topic with built-in speech mode
+- 🔊 **Listen** to any topic with built-in speech mode and **network voices**
 - 🌙 **Switch themes** — warm beige off-white (light) or dark grey / black (dark)
 - 📱 **Add to home screen** on your phone for quick access
 - 🔗 **Share links** with a rich preview image on social apps
@@ -33,7 +35,7 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+Open [http://localhost:3000](http://localhost:3000) locally, or visit the [live site](https://prayer-intentions.vercel.app/).
 
 ### Production build
 
@@ -50,7 +52,7 @@ For link previews and “Add to Home Screen” icons to work correctly in produc
 
 ```bash
 # .env.local
-NEXT_PUBLIC_SITE_URL=https://your-domain.com
+NEXT_PUBLIC_SITE_URL=https://prayer-intentions.vercel.app
 ```
 
 See [`.env.example`](.env.example) for a template.

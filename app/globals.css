@@ -1,21 +1,29 @@
 @import "tailwindcss";
 
 :root {
-  --background-start: #faf7f0;
-  --background-mid: #f5f0e6;
-  --background-end: #ebe4d8;
-  --foreground: #3d3830;
-  --card-bg: rgba(250, 247, 242, 0.75);
-  --card-border: rgba(168, 162, 158, 0.45);
+  --background-start: #f5f0e6;
+  --background-mid: #ebe4d8;
+  --background-end: #e0d8cc;
+  --foreground: #1c1917;
+  --foreground-muted: #44403c;
+  --foreground-subtle: #57534e;
+  --surface: #faf7f2;
+  --surface-elevated: #fffdf9;
+  --surface-border: #c8bfb0;
+  --input-bg: #fffdf9;
 }
 
 .dark {
-  --background-start: #2a2a2a;
-  --background-mid: #1a1a1a;
-  --background-end: #0d0d0d;
-  --foreground: #e7e5e4;
-  --card-bg: rgba(37, 37, 37, 0.75);
-  --card-border: rgba(87, 83, 78, 0.5);
+  --background-start: #2e2e2e;
+  --background-mid: #1c1c1c;
+  --background-end: #0a0a0a;
+  --foreground: #fafaf9;
+  --foreground-muted: #e7e5e4;
+  --foreground-subtle: #d6d3d1;
+  --surface: #242424;
+  --surface-elevated: #2e2e2e;
+  --surface-border: #525252;
+  --input-bg: #2a2a2a;
 }
 
 @theme inline {
@@ -41,6 +49,30 @@ body {
 
 .font-serif {
   font-family: var(--font-lora), Georgia, "Times New Roman", serif;
+}
+
+.text-theme {
+  color: var(--foreground);
+}
+
+.text-theme-muted {
+  color: var(--foreground-muted);
+}
+
+.text-theme-subtle {
+  color: var(--foreground-subtle);
+}
+
+.bg-surface {
+  background-color: var(--surface);
+}
+
+.bg-surface-elevated {
+  background-color: var(--surface-elevated);
+}
+
+.border-surface {
+  border-color: var(--surface-border);
 }
 
 .sr-only {

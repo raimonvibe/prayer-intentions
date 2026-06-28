@@ -4,18 +4,18 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="mt-auto border-t border-stone-300/50 bg-[#f0ebe3]/80 dark:border-stone-700/50 dark:bg-[#141414]/80">
+    <footer className="mt-auto border-t border-surface bg-surface-elevated/90 pb-24">
       <div className="mx-auto max-w-4xl px-4 py-10 sm:px-6">
-        <p className="text-center font-serif text-stone-700 dark:text-stone-300">
+        <p className="text-center font-serif text-theme">
           &copy; {year} Prayer Intentions
         </p>
-        <p className="mt-1 text-center text-sm text-stone-600 dark:text-stone-400">
+        <p className="mt-1 text-center text-sm text-theme-muted">
           Holding the world in quiet prayer
         </p>
 
         <nav
           aria-label="Social links"
-          className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-5"
+          className="mt-8 flex flex-wrap items-center justify-center gap-3"
         >
           {socialLinks.map((link) => (
             <a
@@ -25,10 +25,9 @@ export function Footer() {
               rel="noopener noreferrer"
               aria-label={link.label}
               title={link.label}
-              className={`flex items-center justify-center gap-2 rounded-xl px-3 py-2.5 text-sm font-medium text-white transition ${link.className}`}
+              className={`flex h-11 w-11 items-center justify-center rounded-full text-base text-white transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-stone-500 dark:focus-visible:ring-offset-stone-900 ${link.className}`}
             >
               <i className={link.icon} aria-hidden="true" />
-              <span>{link.label}</span>
             </a>
           ))}
         </nav>
