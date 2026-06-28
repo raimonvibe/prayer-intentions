@@ -31,6 +31,18 @@ export function Footer() {
             </a>
           ))}
         </nav>
+
+        <p className="mt-8 text-sm text-theme-muted">
+          Made with ❤️ by{" "}
+          <a
+            href="https://www.raimonvibe.eu/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-theme underline decoration-[var(--line)] underline-offset-4 transition hover:text-accent hover:decoration-[var(--accent)]"
+          >
+            raimonvibe
+          </a>
+        </p>
       </div>
     </footer>
   );
