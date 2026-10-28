@@ -1,3 +1,4 @@
+import { genuineVoices } from "./noveltyVoices";
 export type SpeechVoiceOption = {
   name: string;
   lang: string;
@@ -74,7 +75,8 @@ export function loadVoices(): Promise<SpeechVoiceOption[]> {
 
     const synth = window.speechSynthesis;
 
-    const readVoices = () => sortVoicesPreferNetwork(mapVoices(synth.getVoices()));
+    // Novelty voices (Bubbles, Junior…) never reach the picker.
+    const readVoices = () => sortVoicesPreferNetwork(mapVoices(genuineVoices(synth.getVoices())));
 
     const initial = readVoices();
     if (initial.length > 0) {
@@ -128,7 +130,8 @@ export function speakText(
   utterance.rate = 0.95;
   utterance.pitch = 1;
 
-  const voices = window.speechSynthesis.getVoices();
+  // ...nor the default, which falls back through these when no voice was chosen.
+  const voices = genuineVoices(window.speechSynthesis.getVoices());
   const preferredVoice =
     (options?.voiceURI
       ? voices.find((voice) => voice.voiceURI === options.voiceURI)
